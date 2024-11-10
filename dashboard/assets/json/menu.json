@@ -1,0 +1,102 @@
+[
+  {
+    "estado": true,
+    "id": "btnopmenu1",
+    "icono": "nuevaSoli.png",
+    "nombre": "Solicitudes Pendientes",
+    "rol": [
+      "ADMIN",
+      "DESARROLLO",
+      "OPERADOR"
+    ],
+    "action": "solicitudesPendiente(this)"
+  },
+  {
+    "estado": true,
+    "id": "btnopmenu2",
+    "icono": "infoSoli.png",
+    "nombre": "Ver Informacíon",
+    "rol": [
+      "ADMIN",
+      "DESARROLLO",
+      "OPERADOR"
+    ],
+    "action": "verInformacion(this)"
+  },
+  {
+    "estado": true,
+    "id": "btnopmenu3",
+    "icono": "estadoSoli.png",
+    "nombre": "Cambio Correo",
+    "rol": [
+      "ADMIN",
+      "DESARROLLO",
+      "OPERADOR"
+    ],
+    "action": "cambiarCorreo(this)"
+  },
+  {
+    "estado": true,
+    "id": "btnopmenu4",
+    "icono": "listanegra.png",
+    "nombre": "Lista Negra",
+    "rol": [
+      "ADMIN",
+      "DESARROLLO",
+      "OPERADOR"
+    ],
+    "action": "listaNegra(this)"
+  },
+  {
+    "estado": true,
+    "id": "btnopmenu5",
+    "icono": "cambios.png",
+    "nombre": "Historico",
+    "rol": [
+      "ADMIN",
+      "DESARROLLO"
+    ],
+    "action": "historico(this)"
+  },
+  {
+    "estado": true,
+    "id": "btnopmenu6",
+    "icono": "report.png",
+    "nombre": "Reporteria",
+    "rol": [
+      "DESARROLLO"
+    ],
+    "action": "verReportes(this)"
+  },
+  {
+    "estado": true,
+    "id": "btnopmenu7",
+    "icono": "campanias.png",
+    "nombre": "Administración de Campañas",
+    "rol": [
+      "ADMIN",
+      "DESARROLLO"
+    ],
+    "action": "generarCampana(this)"
+  },
+  {
+    "estado": true,
+    "id": "btnopmenu8",
+    "icono": "gestionaruser.png",
+    "nombre": "Administración de Usuarios",
+    "rol": [
+      "DESARROLLO"
+    ],
+    "action": "gestionarUsuario(this)"
+  },
+  {
+    "estado": true,
+    "id": "btnopmenu9",
+    "icono": "admSist.png",
+    "nombre": "Administración del Sistema",
+    "rol": [
+      "DESARROLLO"
+    ],
+    "action": "gestionarSistema(this)"
+  }
+]

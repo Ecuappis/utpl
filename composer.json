@@ -1,0 +1,15 @@
+{
+    "name": "tanya/utpl",
+    "description": "Proyecto de titulacion",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tanya Lorena Cedeno Medina"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "phpseclib/phpseclib": "^3.0"
+    }
+}
