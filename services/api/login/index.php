@@ -59,6 +59,12 @@ try {
 
   if ($resultado->num_rows > 0) {
     $fila = $resultado->fetch_assoc();
+
+    if ($fila["estado"] == 0) {
+      echo json_encode(['respuesta' => false, 'mensaje' => 'Usuario suspendido', 'resultado' => 'pass']);
+      exit;
+    }
+
     if (password_verify($claveResult['resultado'], $fila["pass"])) {
 
       $token = generarToken(base64_encode($fila["id"]));
@@ -77,6 +83,7 @@ try {
   } else {
     echo json_encode(['respuesta' => false, 'mensaje' => 'Usuario Incorrecto', 'resultado' => 'user']);
   }
+  $conexion->cerrar();
 } catch (Exception $e) {
   // Capturar excepciones generales
   header('HTTP/1.1 500 Internal Server Error');

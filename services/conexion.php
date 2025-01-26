@@ -16,7 +16,7 @@ class Conexion
   }
 
   // Método para establecer la conexión a la base de datos
-  private function conectar()
+  public function conectar()
   {
     // Creación de la conexión usando la clase mysqli
     $this->conexion = new mysqli($this->host, $this->usuario, $this->clave, $this->baseDeDatos);

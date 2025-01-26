@@ -1,0 +1,231 @@
+:root {
+  --img-flecha: url('../../resources/flecha.png');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  touch-action: manipulation;
+}
+
+/* Estilo general del scrollbar */
+body::-webkit-scrollbar {
+  width: 10px; /* Ancho del scrollbar */
+  background-color: #f0f0f0; /* Fondo del scrollbar */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo del "thumb" (control deslizante) */
+body::-webkit-scrollbar-thumb {
+  background-color: #b0b0b0; /* Color plomizo o plateado */
+  border-radius: 5px; /* Bordes redondeados */
+  border: 2px solid #f0f0f0; /* Espaciado alrededor */
+}
+
+/* Estilo del thumb cuando está en hover */
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0; /* Un poco más oscuro al pasar el mouse */
+}
+
+/* Estilo del thumb cuando está activo */
+body::-webkit-scrollbar-thumb:active {
+  background-color: #909090; /* Más oscuro cuando se arrastra */
+}
+
+/* Opcional: Estilo del track (fondo del scrollbar) */
+body::-webkit-scrollbar-track {
+  background-color: #e0e0e0; /* Fondo más claro del track */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  padding: 20px;
+  font-weight: bold;
+}
+
+.tableh {
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  gap: 1px;
+}
+
+.tableb > div {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #989898;
+  gap: 1px;
+}
+
+.tableh > div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-indent: 5px;
+  border-radius: 4px;
+  background-color: #194721;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.tableh > div:nth-child(1),
+.tableb > div > div:nth-child(1),
+.tableh > div:nth-child(3),
+.tableb > div > div:nth-child(3),
+.tableh > div:nth-child(4),
+.tableb > div > div:nth-child(4) {
+  width: 70px;
+}
+
+.tableh > div:nth-child(2),
+.tableb > div > div:nth-child(2) {
+  flex: 1;
+}
+
+.tableb {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.tableb > div > div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-indent: 5px;
+  border-radius: 4px;
+  color: #333;
+  font-weight: bold;
+  font-size: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.tableb > div > div:nth-child(1),
+.tableb > div > div:nth-child(3),
+.tableb > div > div:nth-child(4) {
+  text-align: center;
+}
+
+.tableb > div > div:nth-child(4) {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toogle {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: var(--img-flecha);
+  opacity: 0.8;
+}
+
+.toogle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.toogle:active {
+  cursor: progress;
+  opacity: 0.8;
+  transform: scale(1);
+}
+
+.toogleExpanded {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: #ebebeb;
+}
+
+.toogleExpanded > div {
+  border-bottom: 1px solid #dcdcdc;
+  display: flex;
+  flex: 1;
+  padding: 10px;
+  padding-left: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.toogleExpanded > div > div:nth-child(1) {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toogleExpanded > div > div:nth-child(2) {
+  flex: 1;
+  text-indent: 10px;
+}
+
+.radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  border: 1.5px solid #d2d2d2;
+}
+
+.check {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #d2d2d2;
+  border-radius: 2px;
+}
+
+.sin-rotate {
+  transform: rotate(0deg);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+footer {
+  padding: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+footer > div {
+  text-align: center;
+  width: 150px;
+  padding: 10px;
+  background-color: #194721;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+footer > div:hover {
+  background-color: #0a2a10;
+  transform: scale(1.1);
+}
+
+footer > div:active {
+  cursor: progress;
+  background-color: #194721;
+  transform: scale(1);
+}

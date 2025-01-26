@@ -2,7 +2,8 @@
   --color-nav: #004270;
   --color-hover: #003053;
   --img-menu: url('../resources/menu.png');
-  --img-user: url('../resources/user2.png');
+  --img-userm: url('../resources/userm.png');
+  --img-userf: url('../resources/userf.png');
   --img-logo: url('../resources/logo.png');
 }
 
@@ -142,10 +143,17 @@ body {
 .img-user {
   width: 70px;
   height: 70px;
-  background-image: var(--img-user);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+.user-hombre {
+  background-image: var(--img-userm);
+}
+
+.user-mujer {
+  background-image: var(--img-userf);
 }
 
 .option-user {

@@ -35,11 +35,11 @@
         <section id="cajanavlist" class="nav-submodal">
           <article class="data-user">
             <div class="submodal-user">
-              <div class="img-user"></div>
+              <div id='imgusericon'></div>
               <div class="option-user">
-                <div id="lbnomuser" class="negrita">TANYA CEDEÑO</div>
-                <div id="lbroluser">ESTUDIANTE</div>
-                <div id="lbciuser" class="negrita">MACHALA</div>
+                <div id="lbnomuser" class="negrita"></div>
+                <div id="lbroluser"></div>
+                <div id="lbciuser" class="negrita"></div>
                 <div class="cerrar" onclick="">Cerrar Sesión</div>
               </div>
             </div>
