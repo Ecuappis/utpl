@@ -158,4 +158,43 @@ class UsuarioService implements UsuarioInterface
     }
     return $respuesta;
   }
+
+  public function generarCSV(string $token)
+  {
+    $respuesta = ['respuesta' => false, 'mensaje' => 'Error al generar el csv', 'resultado' => ''];
+    try {
+      $usuario = $this->validarToken($token);
+      if ($usuario > 0) {
+        $data = array();
+        $conexion = new Conexion();
+        $sql = "SELECT preguntas.pregunta FROM preguntas WHERE estado = 1";
+        $resultado = $conexion->conexion->query($sql);
+        if ($resultado->num_rows > 0) {
+          while ($fila = $resultado->fetch_assoc()) {
+            $data[] = $fila['pregunta'];
+          }
+          // Cabeceras del archivo para forzar la descarga
+          header('Content-Type: text/csv; charset=UTF-8');
+          header('Content-Disposition: attachment; filename="encuesta.csv"');
+          header('Pragma: no-cache');
+          header('Expires: 0');
+          // Abrir salida para escribir el CSV en memoria
+          $output = fopen('php://output', 'w');
+          // Escribir BOM para que Excel interprete correctamente UTF-8
+          fwrite($output, "\xEF\xBB\xBF");
+          // Escribir las preguntas como una sola fila (cabecera)
+          fputcsv($output, $data);
+          fclose($output);
+        } else {
+          $respuesta['mensaje'] = 'No hay preguntas habilitadas';
+        }
+      } else {
+        $respuesta['mensaje'] = 'Acceso Denegado a Usuario';
+      }
+    } catch (Exception $e) {
+      header('HTTP/1.1 500 Internal Server Error');
+      echo json_encode(['respuesta' => false, 'mensaje' => $e->getMessage()]);
+    }
+    return $respuesta;
+  }
 }

@@ -137,7 +137,7 @@ function abrirToogle(indice) {
 
 function generarcsv() {
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', '../../../services/api/csv/', true);
+  xhr.open('POST', '../../../services/api/user/', true);
   xhr.responseType = 'blob';
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -157,5 +157,5 @@ function generarcsv() {
   xhr.onerror = function () {
     console.error('Error de red al generar el archivo CSV.');
   };
-  xhr.send();
+  xhr.send(JSON.stringify({ op: 'generarCSV' }));
 }

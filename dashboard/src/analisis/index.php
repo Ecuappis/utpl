@@ -13,7 +13,7 @@
       <h2>Cargar Archivo CSV</h2>
       <p>Selecciona un archivo para continuar</p>
       <input type="file" id="file-input" class="file-input" accept=".csv" />
-      <button class="upload-button">Subir archivo</button>
+      <button onclick="cargarcsv();" class="upload-button">Subir archivo</button>
     </div>
   </div>
   <script src="index.js"></script>

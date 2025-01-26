@@ -56,6 +56,10 @@ try {
     case 'listaOpcionesPregunta':
       $respuesta = $usuarioService->listaOpcionesPregunta($data['numero'], $token);
       break;
+    case 'generarCSV':
+      $respuesta = $usuarioService->generarCSV($token);
+      exit;
+      break;
     default:
       $respuesta['mensaje'] = 'Servicio Requerido inexistente.';
       break;

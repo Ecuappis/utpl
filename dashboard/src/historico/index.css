@@ -1,0 +1,237 @@
+:root {
+  --img-flecha: url('../../resources/flecha.png');
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  touch-action: manipulation;
+}
+
+/* Estilo general del scrollbar */
+body::-webkit-scrollbar {
+  width: 10px; /* Ancho del scrollbar */
+  background-color: #f0f0f0; /* Fondo del scrollbar */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo del "thumb" (control deslizante) */
+body::-webkit-scrollbar-thumb {
+  background-color: #b0b0b0; /* Color plomizo o plateado */
+  border-radius: 5px; /* Bordes redondeados */
+  border: 2px solid #f0f0f0; /* Espaciado alrededor */
+}
+
+/* Estilo del thumb cuando está en hover */
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0; /* Un poco más oscuro al pasar el mouse */
+}
+
+/* Estilo del thumb cuando está activo */
+body::-webkit-scrollbar-thumb:active {
+  background-color: #909090; /* Más oscuro cuando se arrastra */
+}
+
+/* Opcional: Estilo del track (fondo del scrollbar) */
+body::-webkit-scrollbar-track {
+  background-color: #e0e0e0; /* Fondo más claro del track */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar de filtros */
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Sección de resultados */
+.results {
+  flex: 1;
+  padding: 20px;
+}
+
+.results h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.result-list {
+  display: flex;
+}
+
+.opcion-filtro {
+  border: 1px solid #cccccc;
+  background-color: #dadada;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  font-weight: 600;
+}
+
+.opcion-filtro:hover {
+  background-color: #cccccc;
+}
+
+.opcion-filtro > div:nth-child(1) {
+  flex: 1;
+  text-indent: 10px;
+}
+
+.opcion-filtro > div:nth-child(2) {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toogle {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: var(--img-flecha);
+  opacity: 0.8;
+}
+
+.toogle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.toogle:active {
+  cursor: progress;
+  opacity: 0.8;
+  transform: scale(1);
+}
+
+.modal-grafica {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.modal-grafica > article {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-grafica > article > div:nth-child(1) {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-grafica > article > div:nth-child(2) {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #555;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.modal-grafica > article > div:nth-child(1) > div:nth-child(1) {
+  width: 250px;
+  height: 250px;
+  border-radius: 250px;
+  border: 1px solid #777;
+}
+.modal-grafica > article > div:nth-child(1) > div:nth-child(2) {
+  position: absolute;
+  bottom: 10px;
+  font-weight: bold;
+}
+
+.modal-fechas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.modal-fechas > div {
+  flex: 1;
+  font-weight: bold;
+}
+
+.modal-fechas > div > input {
+  width: 160px;
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #d2d2d2;
+}
+
+.sin-rotate {
+  transform: rotate(0deg);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.modal-desplegable {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pregunta-area {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  border-bottom: 1.5px solid #e2e2e2;
+}
+
+.pregunta-area > input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.pregunta-area > a {
+  margin-left: 10px;
+}
