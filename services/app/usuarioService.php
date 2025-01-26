@@ -74,7 +74,7 @@ class UsuarioService implements UsuarioInterface
         if ($resultado->num_rows > 0) {
           $datos = $resultado->fetch_assoc();
           // Realizar consulta de menu de usuario
-          $sql = "SELECT b.icono, b.nombre, b.page, r.jerarquia FROM boton_rol br INNER JOIN boton b ON b.id = br.boton INNER JOIN rol r ON r.id = br.rol INNER JOIN seccion s ON s.id = b.seccion WHERE s.nombre = 'PANEL' AND br.rol = " . $datos['rol'] . " ORDER BY b.id ASC ";
+          $sql = "SELECT b.icono, b.nombre, b.page, r.jerarquia FROM boton_rol br INNER JOIN boton b ON b.id = br.boton AND b.estado = 1 INNER JOIN rol r ON r.id = br.rol INNER JOIN seccion s ON s.id = b.seccion WHERE s.nombre = 'PANEL' AND br.rol = " . $datos['rol'] . " ORDER BY b.id ASC";
           $resultado = $conexion->conexion->query($sql);
           if ($resultado->num_rows > 0) {
             while ($fila = $resultado->fetch_assoc()) {

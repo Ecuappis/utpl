@@ -21,7 +21,7 @@
     <article id="cajatabla" class="tableb"></article>
   </section>
   <footer id="btngenerar">
-    <div>Generar Encuesta</div>
+    <div onclick="generarcsv();">Generar Encuesta</div>
   </footer>
   <script src="index.js"></script>
 </body>

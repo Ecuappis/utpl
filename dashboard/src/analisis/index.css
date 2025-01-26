@@ -1,3 +1,37 @@
+body {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  touch-action: manipulation;
+}
+
+/* Estilo general del scrollbar */
+body::-webkit-scrollbar {
+  width: 10px; /* Ancho del scrollbar */
+  background-color: #f0f0f0; /* Fondo del scrollbar */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo del "thumb" (control deslizante) */
+body::-webkit-scrollbar-thumb {
+  background-color: #b0b0b0; /* Color plomizo o plateado */
+  border-radius: 5px; /* Bordes redondeados */
+  border: 2px solid #f0f0f0; /* Espaciado alrededor */
+}
+
+/* Estilo del thumb cuando está en hover */
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0; /* Un poco más oscuro al pasar el mouse */
+}
+
+/* Estilo del thumb cuando está activo */
+body::-webkit-scrollbar-thumb:active {
+  background-color: #909090; /* Más oscuro cuando se arrastra */
+}
+
 /* Contenedor principal */
 .upload-container {
   display: flex;
@@ -19,8 +53,9 @@
 
 .upload-card h2 {
   font-size: 24px;
-  color: #0074d9;
+  color: #0b512a;
   margin-bottom: 10px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .upload-card p {
@@ -34,7 +69,7 @@
   margin: 15px 0;
   padding: 10px;
   font-size: 16px;
-  border: 2px dashed #0074d9;
+  border: 2px dashed #02559e;
   border-radius: 8px;
   width: 100%;
   text-align: center;
@@ -46,7 +81,7 @@
 
 /* Botón de subir */
 .upload-button {
-  background: linear-gradient(45deg, #0074d9, #00bfff);
+  background: #09582d;
   color: white;
   padding: 12px 20px;
   font-size: 16px;
@@ -57,6 +92,6 @@
 }
 
 .upload-button:hover {
-  background: linear-gradient(45deg, #005f99, #0074d9);
+  background: #022e16;
   transform: translateY(-2px);
 }

@@ -4,7 +4,7 @@ define("CLAVE_TOKEN", "Cl4v3T0k3n2*2A**Utpl");
 function generarToken($usuario)
 {
   //Horas de Duracion del Token
-  $horas = 1;
+  $horas = 8;
   $tiempoExpiracion = time() + ($horas * 60 * 60);
 
   $payload = [

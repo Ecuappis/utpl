@@ -14,6 +14,20 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Volcando estructura para tabla utplbd.area
+CREATE TABLE IF NOT EXISTS `area` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla utplbd.area: ~4 rows (aproximadamente)
+INSERT INTO `area` (`id`, `nombre`) VALUES
+	(1, 'Por afinidad'),
+	(2, 'Por demografia'),
+	(3, 'Por expectativa'),
+	(4, 'Por habilidad');
+
 -- Volcando estructura para tabla utplbd.boton
 CREATE TABLE IF NOT EXISTS `boton` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -21,17 +35,20 @@ CREATE TABLE IF NOT EXISTS `boton` (
   `nombre` varchar(20) NOT NULL,
   `page` varchar(50) NOT NULL,
   `seccion` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK1_SECCION` (`seccion`),
-  CONSTRAINT `FK1_SECCION` FOREIGN KEY (`seccion`) REFERENCES `seccion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `FK2_ESTADO` (`estado`),
+  CONSTRAINT `FK1_SECCION` FOREIGN KEY (`seccion`) REFERENCES `seccion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK2_ESTADO` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla utplbd.boton: ~4 rows (aproximadamente)
-INSERT INTO `boton` (`id`, `icono`, `nombre`, `page`, `seccion`) VALUES
-	(1, 'resources/encuesta.png', 'Encuesta', 'encuesta/', 1),
-	(2, 'resources/analisis.png', 'Análisis', 'analisis/', 1),
-	(3, 'resources/historico.png', 'Histórico', 'historico/', 1),
-	(4, 'resources/informacion.png', 'Información', 'informacion/', 1);
+INSERT INTO `boton` (`id`, `icono`, `nombre`, `page`, `seccion`, `estado`) VALUES
+	(1, 'resources/encuesta.png', 'Encuesta', 'encuesta/', 1, 1),
+	(2, 'resources/analisis.png', 'Análisis', 'analisis/', 1, 1),
+	(3, 'resources/historico.png', 'Histórico', 'historico/', 1, 1),
+	(4, 'resources/informacion.png', 'Información', 'informacion/', 1, 0);
 
 -- Volcando estructura para tabla utplbd.boton_rol
 CREATE TABLE IF NOT EXISTS `boton_rol` (
@@ -45,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `boton_rol` (
   CONSTRAINT `FK2_ROL` FOREIGN KEY (`rol`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla utplbd.boton_rol: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla utplbd.boton_rol: ~3 rows (aproximadamente)
 INSERT INTO `boton_rol` (`id`, `boton`, `rol`) VALUES
 	(1, 1, 1),
 	(2, 2, 1),
@@ -128,41 +145,44 @@ CREATE TABLE IF NOT EXISTS `preguntas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pregunta` varchar(300) NOT NULL,
   `tipo` int(11) NOT NULL,
+  `segmento` int(11) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `FK1_TIPO` (`tipo`),
   KEY `FK2_ESTADO_PREGUNTA` (`estado`),
+  KEY `FK3_SEGMENTO` (`segmento`),
   CONSTRAINT `FK1_TIPO` FOREIGN KEY (`tipo`) REFERENCES `tipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK2_ESTADO_PREGUNTA` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK2_ESTADO_PREGUNTA` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK3_SEGMENTO` FOREIGN KEY (`segmento`) REFERENCES `area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla utplbd.preguntas: ~25 rows (aproximadamente)
-INSERT INTO `preguntas` (`id`, `pregunta`, `tipo`, `estado`) VALUES
-	(1, 'Edad', 1, 1),
-	(2, 'Género', 1, 1),
-	(3, 'Institución educativa', 1, 1),
-	(4, 'Área de residencia', 1, 1),
-	(5, '¿En qué año escolar estás actualmente?', 1, 1),
-	(6, '¿Qué idiomas hablas?', 2, 1),
-	(7, '¿Cuál es el nivel educativo más alto que han alcanzado tus padres o tutores:', 1, 1),
-	(8, '¿Cuál es el ingreso familiar mensual aproximado?', 1, 1),
-	(9, '¿Cuáles de las siguientes actividades te interesan?', 2, 1),
-	(10, '¿Cuáles de las siguientes actividades te gusta realizar?', 2, 1),
-	(11, '¿Qué asignatura disfrutas más en el colegio?', 1, 1),
-	(12, '¿Cuál de las siguientes carreras te parece más atractiva?', 1, 1),
-	(13, '¿Quién influye más en tu decisión sobre qué estudiar en el futuro?', 1, 1),
-	(14, '¿Tus maestros te han animado a explorar temas relacionados con la ciencia o la tecnología?', 3, 1),
-	(15, '¿Qué opinan tus amigos sobre el estudio de disciplinas relacionadas con la tecnología o la ciencia?', 1, 1),
-	(16, '¿Qué tanto apoyo recibes de tu familia para estudiar temas relacionados con las matemáticas o la ciencia?', 3, 1),
-	(17, '¿Qué obstáculos sientes que podrías enfrentar al seguir una de estas carreras (Ciencia, Tecnología, Ingeniería, Arte y Matemáticas)?', 2, 1),
-	(18, '¿Qué sectores te interesan más para trabajar en el futuro?', 1, 1),
-	(19, '¿Qué tan optimista te sientes sobre tu futuro en una carrera que involucre tecnología o ciencia?', 3, 1),
-	(20, '¿Crees que tu carrera te brindará estabilidad económica?', 3, 1),
-	(21, '¿Qué esperas lograr con tu carrera en términos de impacto social o tecnológico?', 1, 1),
-	(22, '¿Crees que las innovaciones tecnológicas están mejorando la calidad de vida de las personas?', 3, 1),
-	(23, '¿Qué área consideras más importante para que avance tecnológicamente?', 1, 1),
-	(24, '¿Cuál es la probabilidad de que selecciones una carrera relacionada con Ciencia, Tecnología, Ingeniería, Arte o Matemáticas (STEAM)?', 3, 1),
-	(25, '¿Qué tan informado/a te sientes sobre las diferentes opciones de carrera dentro de las áreas de Ciencia, Tecnología, Ingeniería, Arte y Matemáticas (STEAM)?', 1, 1);
+INSERT INTO `preguntas` (`id`, `pregunta`, `tipo`, `segmento`, `estado`) VALUES
+	(1, 'Edad', 1, 2, 1),
+	(2, 'Género', 1, 2, 1),
+	(3, 'Institución educativa', 1, 2, 1),
+	(4, 'Área de residencia', 1, 2, 1),
+	(5, '¿En qué año escolar estás actualmente?', 1, 1, 1),
+	(6, '¿Qué idiomas hablas?', 2, 1, 1),
+	(7, '¿Cuál es el nivel educativo más alto que han alcanzado tus padres o tutores:', 1, 1, 1),
+	(8, '¿Cuál es el ingreso familiar mensual aproximado?', 1, 1, 1),
+	(9, '¿Cuáles de las siguientes actividades te interesan?', 2, 1, 1),
+	(10, '¿Cuáles de las siguientes actividades te gusta realizar?', 2, 1, 1),
+	(11, '¿Qué asignatura disfrutas más en el colegio?', 1, 1, 1),
+	(12, '¿Cuál de las siguientes carreras te parece más atractiva?', 1, 1, 1),
+	(13, '¿Quién influye más en tu decisión sobre qué estudiar en el futuro?', 1, 1, 1),
+	(14, '¿Tus maestros te han animado a explorar temas relacionados con la ciencia o la tecnología?', 3, 1, 1),
+	(15, '¿Qué opinan tus amigos sobre el estudio de disciplinas relacionadas con la tecnología o la ciencia?', 1, 1, 1),
+	(16, '¿Qué tanto apoyo recibes de tu familia para estudiar temas relacionados con las matemáticas o la ciencia?', 3, 1, 1),
+	(17, '¿Qué obstáculos sientes que podrías enfrentar al seguir una de estas carreras (Ciencia, Tecnología, Ingeniería, Arte y Matemáticas)?', 2, 1, 1),
+	(18, '¿Qué sectores te interesan más para trabajar en el futuro?', 1, 1, 1),
+	(19, '¿Qué tan optimista te sientes sobre tu futuro en una carrera que involucre tecnología o ciencia?', 3, 1, 1),
+	(20, '¿Crees que tu carrera te brindará estabilidad económica?', 3, 3, 1),
+	(21, '¿Qué esperas lograr con tu carrera en términos de impacto social o tecnológico?', 1, 1, 1),
+	(22, '¿Crees que las innovaciones tecnológicas están mejorando la calidad de vida de las personas?', 3, 1, 1),
+	(23, '¿Qué área consideras más importante para que avance tecnológicamente?', 1, 1, 1),
+	(24, '¿Cuál es la probabilidad de que selecciones una carrera relacionada con Ciencia, Tecnología, Ingeniería, Arte o Matemáticas (STEAM)?', 3, 1, 1),
+	(25, '¿Qué tan informado/a te sientes sobre las diferentes opciones de carrera dentro de las áreas de Ciencia, Tecnología, Ingeniería, Arte y Matemáticas (STEAM)?', 1, 1, 1);
 
 -- Volcando estructura para tabla utplbd.respuestas
 CREATE TABLE IF NOT EXISTS `respuestas` (
@@ -203,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `tipo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla utplbd.tipo: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla utplbd.tipo: ~2 rows (aproximadamente)
 INSERT INTO `tipo` (`id`, `nombre`) VALUES
 	(1, 'OPCION SIMPLE'),
 	(2, 'OPCION MULTIPLE'),

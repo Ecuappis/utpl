@@ -134,3 +134,28 @@ function abrirToogle(indice) {
   xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('tokenUTPL'));
   xhr.send(data);
 }
+
+function generarcsv() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '../../../services/api/csv/', true);
+  xhr.responseType = 'blob';
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const blob = new Blob([xhr.response], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'encuesta.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } else {
+      console.error('Error al generar el archivo CSV.');
+    }
+  };
+  xhr.onerror = function () {
+    console.error('Error de red al generar el archivo CSV.');
+  };
+  xhr.send();
+}
