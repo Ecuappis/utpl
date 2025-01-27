@@ -138,6 +138,7 @@ function abrirToogle(indice) {
 function generarcsv() {
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '../../../services/api/user/', true);
+  xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('tokenUTPL'));
   xhr.responseType = 'blob';
   xhr.onload = function () {
     if (xhr.status === 200) {
