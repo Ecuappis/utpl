@@ -43,7 +43,7 @@ class HistoricoService implements HistoricoInterface
     try {
       $conexion = new Conexion();
       $listado = array();
-      $sql = "SELECT p.id AS numero, p.nombre, t.nombre AS tipo FROM preguntas p INNER JOIN area a ON a.id = p.area AND a.estado = 1 INNER JOIN tipo t ON t.id = p.tipo WHERE p.estado = 1 AND a.nemonico = '" . $area . "' ORDER BY numero ASC";
+      $sql = "SELECT p.id AS numero, p.nombre, t.nombre AS tipo FROM preguntas p INNER JOIN area a ON a.id = p.area AND a.estado = 1 INNER JOIN tipo t ON t.id = p.tipo WHERE p.estado = 1 AND p.filtro = 1 AND a.nemonico = '" . $area . "' ORDER BY numero ASC";
       $resultado = $conexion->conexion->query($sql);
       if ($resultado->num_rows > 0) {
         while ($fila = $resultado->fetch_assoc()) {

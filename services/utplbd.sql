@@ -2,7 +2,7 @@
 -- Host:                         127.0.0.1
 -- Versión del servidor:         10.4.32-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.8.0.6938
+-- HeidiSQL Versión:             12.8.0.6908
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -14,38 +14,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Volcando estructura para tabla utplbd.area
-CREATE TABLE IF NOT EXISTS `area` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `nemonico` varchar(50) NOT NULL,
-  `estado` int(11) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`),
-  KEY `FK1_ESTADO_AREA` (`estado`),
-  CONSTRAINT `FK1_ESTADO_AREA` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Volcando datos para la tabla utplbd.area: ~4 rows (aproximadamente)
 INSERT INTO `area` (`id`, `nombre`, `nemonico`, `estado`) VALUES
 	(1, 'Por afinidad', 'POR_AFINIDAD', 1),
 	(2, 'Por demografia', 'POR_DEMOGRAFIA', 1),
 	(3, 'Por expectativa', 'POR_EXPECTATIVA', 1),
 	(4, 'Por habilidad', 'POR_HABILIDAD', 1);
-
--- Volcando estructura para tabla utplbd.boton
-CREATE TABLE IF NOT EXISTS `boton` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `icono` varchar(50) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `page` varchar(50) NOT NULL,
-  `seccion` int(11) NOT NULL,
-  `estado` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK1_SECCION` (`seccion`),
-  KEY `FK2_ESTADO` (`estado`),
-  CONSTRAINT `FK1_SECCION` FOREIGN KEY (`seccion`) REFERENCES `seccion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK2_ESTADO` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla utplbd.boton: ~4 rows (aproximadamente)
 INSERT INTO `boton` (`id`, `icono`, `nombre`, `page`, `seccion`, `estado`) VALUES
@@ -54,62 +28,21 @@ INSERT INTO `boton` (`id`, `icono`, `nombre`, `page`, `seccion`, `estado`) VALUE
 	(3, 'resources/historico.png', 'Histórico', 'historico/', 1, 1),
 	(4, 'resources/informacion.png', 'Información', 'informacion/', 1, 0);
 
--- Volcando estructura para tabla utplbd.boton_rol
-CREATE TABLE IF NOT EXISTS `boton_rol` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `boton` int(11) NOT NULL,
-  `rol` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK1_BOTON` (`boton`),
-  KEY `FK2_ROL` (`rol`),
-  CONSTRAINT `FK1_BOTON` FOREIGN KEY (`boton`) REFERENCES `boton` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK2_ROL` FOREIGN KEY (`rol`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla utplbd.boton_rol: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla utplbd.boton_rol: ~4 rows (aproximadamente)
 INSERT INTO `boton_rol` (`id`, `boton`, `rol`) VALUES
 	(1, 1, 1),
 	(2, 2, 1),
 	(3, 3, 1),
 	(4, 4, 1);
 
--- Volcando estructura para tabla utplbd.encuesta
-CREATE TABLE IF NOT EXISTS `encuesta` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(200) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
-  `cantidad` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Volcando datos para la tabla utplbd.encuesta: ~0 rows (aproximadamente)
-
--- Volcando estructura para tabla utplbd.estado
-CREATE TABLE IF NOT EXISTS `estado` (
-  `id` int(11) NOT NULL,
-  `valor` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla utplbd.estado: ~2 rows (aproximadamente)
 INSERT INTO `estado` (`id`, `valor`) VALUES
 	(0, 'false'),
 	(1, 'true');
 
--- Volcando estructura para tabla utplbd.opciones
-CREATE TABLE IF NOT EXISTS `opciones` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(300) NOT NULL,
-  `pregunta` int(11) NOT NULL,
-  `estado` int(11) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`),
-  KEY `FK2_ESTADO_OPCION` (`estado`),
-  KEY `FK1_PREGUNTAR` (`pregunta`),
-  CONSTRAINT `FK1_PREGUNTAR` FOREIGN KEY (`pregunta`) REFERENCES `preguntas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK2_ESTADO_OPCION` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla utplbd.opciones: ~21 rows (aproximadamente)
+-- Volcando datos para la tabla utplbd.opciones: ~129 rows (aproximadamente)
 INSERT INTO `opciones` (`id`, `nombre`, `pregunta`, `estado`) VALUES
 	(1, '15 años', 1, 1),
 	(2, '16 años', 1, 1),
@@ -126,146 +59,171 @@ INSERT INTO `opciones` (`id`, `nombre`, `pregunta`, `estado`) VALUES
 	(13, 'Rural', 4, 1),
 	(14, 'Español', 6, 1),
 	(15, 'Ingles', 6, 1),
-	(16, 'Otro', 6, 1),
+	(16, 'Otra', 6, 1),
 	(17, '1', 14, 1),
 	(18, '2', 14, 1),
 	(19, '3', 14, 1),
 	(20, '4', 14, 1),
-	(21, '5', 14, 1);
-
--- Volcando estructura para tabla utplbd.persona
-CREATE TABLE IF NOT EXISTS `persona` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `nombres` varchar(100) NOT NULL,
-  `apellido_paterno` varchar(50) NOT NULL,
-  `apellido_materno` varchar(50) NOT NULL,
-  `genero` char(1) NOT NULL,
-  `ciudad` varchar(50) NOT NULL,
-  `rol` int(11) DEFAULT NULL,
-  `usuario` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK1_ROL` (`rol`),
-  KEY `FK2_USER` (`usuario`),
-  CONSTRAINT `FK1_ROL` FOREIGN KEY (`rol`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK2_USER` FOREIGN KEY (`usuario`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+	(21, '5', 14, 1),
+	(22, 'Primero de Bachillerato', 5, 1),
+	(23, 'Segun de Bachillerato', 5, 1),
+	(25, 'Tercero de bachillerato\r\n', 5, 1),
+	(26, 'Primaria\r\n', 7, 1),
+	(27, 'Secundaria', 7, 1),
+	(30, 'Bachillerato', 7, 1),
+	(31, 'Universidad', 7, 1),
+	(32, 'Postgrado', 7, 1),
+	(33, 'Menos de $ 500,00', 8, 1),
+	(34, '$ 501 - $1000', 8, 1),
+	(37, '$1001 - $2000', 8, 1),
+	(38, '$2001- $3000\r\n', 8, 1),
+	(39, 'Más de $3000', 8, 1),
+	(40, 'Me interesa trabajar con herramientas, máquinas y equipos.', 9, 1),
+	(41, 'Disfruto arreglando o construyendo cosas físicas (por ejemplo, reparaciones en casa, proyectos de bricolaje).', 9, 1),
+	(44, 'Me siento atraído/a por temas relacionados con mecánica y automóviles.', 9, 1),
+	(45, 'Disfruto explorando y aprendiendo sobre seres vivos como animales, peces y plantas.', 9, 1),
+	(46, 'Encuentro fascinante la ingeniería y cómo se utiliza para diseñar y construir soluciones prácticas a problemas cotidianos y globales.', 9, 1),
+	(47, 'Me interesa investigar fenómenos físicos, biológicos y/o culturales para entender sus causas y efectos.', 9, 1),
+	(50, 'Me gusta jugar ajedrez.', 9, 1),
+	(51, 'Disfruto explorando temas relacionados con ciencia ficción y avances científicos futuristas.', 9, 1),
+	(52, 'Encuentro fascinante los misterios sin resolver y me gusta buscar soluciones lógicas y científicas para resolverlos.', 9, 1),
+	(53, 'Me gusta leer novelas de detectives y explorar el razonamiento detrás de los casos y las soluciones propuestas.', 9, 1),
+	(54, 'Me interesa trabajar con materiales físicos (como pinturas, arcilla, telas) para crear productos artísticos.', 9, 1),
+	(55, 'Disfruto explorando temas relacionados con arte y belleza visual en diferentes formas de expresión (dibujo, pintura, escultura).', 9, 1),
+	(56, 'Disfruto de actividades artísticas como la música, el teatro o la literatura que involucran la creación de obras y expresiones creativas.', 9, 1),
+	(57, 'Analizar datos para encontrar patrones y conclusiones.', 10, 1),
+	(60, 'Aprender sobre nuevos descubrimientos científicos.', 10, 1),
+	(61, 'Explorar nuevas tecnologías y sus impactos en la sociedad.', 10, 1),
+	(63, 'Resolver problemas usando herramientas y software tecnológico.', 10, 1),
+	(66, 'Diseñar y construir estructuras o dispositivos prácticos.', 10, 1),
+	(67, 'Resolver problemas complejos de manera creativa.', 10, 1),
+	(68, 'Crear obras artísticas como pinturas, dibujos o esculturas.', 10, 1),
+	(69, 'Compartir y recibir retroalimentación sobre tu arte.', 10, 1),
+	(70, 'Analizar datos y realizar interpretaciones estadísticas.', 10, 1),
+	(71, 'Resolver problemas matemáticos y encontrar soluciones eficientes.', 10, 1),
+	(72, 'Matemáticas', 11, 1),
+	(73, 'Biología', 11, 1),
+	(74, 'Física', 11, 1),
+	(75, 'Química', 11, 1),
+	(76, 'Tecnología', 11, 1),
+	(77, 'Arte', 11, 1),
+	(78, 'Investigador/a científico/a', 12, 1),
+	(81, 'Desarrollador/a de software', 12, 1),
+	(82, 'Ingeniero/a civil', 12, 1),
+	(83, 'Artista digital', 12, 1),
+	(84, 'Matemático/a o estadístico/a', 12, 1),
+	(85, 'Otro', 12, 1),
+	(86, 'Familia', 13, 1),
+	(87, 'Maestros', 13, 1),
+	(88, 'Amigos', 13, 1),
+	(89, 'Redes sociales', 13, 1),
+	(92, 'Nadie en particular', 13, 1),
+	(93, 'Muy positivo', 15, 1),
+	(94, 'Positivo', 15, 1),
+	(95, 'Neutro', 15, 1),
+	(96, 'Negativo', 15, 1),
+	(97, 'Muy negativo', 15, 1),
+	(98, '1', 16, 1),
+	(99, '2', 16, 1),
+	(100, '3', 16, 1),
+	(101, '4', 16, 1),
+	(102, '5', 16, 1),
+	(103, 'Falta de recursos educativos', 17, 1),
+	(104, 'Falta de apoyo familiar', 17, 1),
+	(105, 'Dificultad en las materias', 17, 1),
+	(106, 'Falta de motivación', 17, 1),
+	(107, 'Otra', 17, 1),
+	(108, 'Salud', 18, 1),
+	(109, 'Tecnología', 18, 1),
+	(110, 'Medio ambiente', 18, 1),
+	(111, 'Arte', 18, 1),
+	(112, 'Educación (T/S/A)', 18, 1),
+	(113, '1', 19, 1),
+	(114, '2', 19, 1),
+	(115, '3', 19, 1),
+	(116, '4', 19, 1),
+	(117, '5', 19, 1),
+	(118, '1', 20, 1),
+	(119, '2', 20, 1),
+	(120, '3', 20, 1),
+	(121, '4', 20, 1),
+	(122, '5', 20, 1),
+	(123, 'Mejorar la calidad de vida de las personas', 21, 1),
+	(125, 'Innovar y crear nuevas tecnologías', 21, 1),
+	(126, 'Contribuir a la sostenibilidad', 21, 1),
+	(127, 'Desarrollar nuevas ideas artísticas', 21, 1),
+	(130, 'No estoy seguro(a)', 21, 1),
+	(131, '1', 22, 1),
+	(132, '2', 22, 1),
+	(133, '3', 22, 1),
+	(134, '4', 22, 1),
+	(135, '5', 22, 1),
+	(136, 'Salud', 23, 1),
+	(138, 'Energía', 23, 1),
+	(139, 'Educación', 23, 1),
+	(140, 'Transporte', 23, 1),
+	(141, 'Medio Ambiente', 23, 1),
+	(143, '1', 24, 1),
+	(144, '2', 24, 1),
+	(145, '3', 24, 1),
+	(146, '4', 24, 1),
+	(147, '5', 24, 1),
+	(150, 'Muy informado/a', 25, 1),
+	(151, 'Informado/a', 25, 1),
+	(152, 'Neutro/a', 25, 1),
+	(153, 'Poco informado/a', 25, 1),
+	(154, 'Nada Informado/a', 25, 1);
 
 -- Volcando datos para la tabla utplbd.persona: ~1 rows (aproximadamente)
 INSERT INTO `persona` (`id`, `username`, `nombres`, `apellido_paterno`, `apellido_materno`, `genero`, `ciudad`, `rol`, `usuario`) VALUES
 	(1, 'TANYA CEDEÑO', 'TANYA LORENA', 'CEDEÑO', 'MEDINA', 'F', 'MACHALA', 1, 1);
 
--- Volcando estructura para tabla utplbd.preguntas
-CREATE TABLE IF NOT EXISTS `preguntas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pregunta` varchar(300) NOT NULL,
-  `nombre` varchar(200) NOT NULL,
-  `tipo` int(11) NOT NULL,
-  `area` int(11) NOT NULL,
-  `estado` int(11) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`),
-  KEY `FK1_TIPO` (`tipo`),
-  KEY `FK2_ESTADO_PREGUNTA` (`estado`),
-  KEY `FK3_SEGMENTO` (`area`) USING BTREE,
-  CONSTRAINT `FK1_TIPO` FOREIGN KEY (`tipo`) REFERENCES `tipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK2_ESTADO_PREGUNTA` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK3_SEGMENTO` FOREIGN KEY (`area`) REFERENCES `area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Volcando datos para la tabla utplbd.preguntas: ~25 rows (aproximadamente)
-INSERT INTO `preguntas` (`id`, `pregunta`, `nombre`, `tipo`, `area`, `estado`) VALUES
-	(1, 'Edad', 'Edad', 1, 2, 1),
-	(2, 'Género', 'Género', 1, 2, 1),
-	(3, 'Institución educativa', 'Institución', 1, 2, 1),
-	(4, 'Área de residencia', 'Residencia', 1, 2, 1),
-	(5, '¿En qué año escolar estás actualmente?', 'Nivel', 1, 1, 1),
-	(6, '¿Qué idiomas hablas?', 'Idiomas', 2, 1, 1),
-	(7, '¿Cuál es el nivel educativo más alto que han alcanzado tus padres o tutores:', 'Educación Familiar', 1, 1, 1),
-	(8, '¿Cuál es el ingreso familiar mensual aproximado?', 'Ingresos', 1, 1, 1),
-	(9, '¿Cuáles de las siguientes actividades te interesan?', 'Interes', 2, 1, 1),
-	(10, '¿Cuáles de las siguientes actividades te gusta realizar?', 'Afinidad', 2, 1, 1),
-	(11, '¿Qué asignatura disfrutas más en el colegio?', 'Asignatura', 1, 1, 1),
-	(12, '¿Cuál de las siguientes carreras te parece más atractiva?', 'Carreras', 1, 1, 1),
-	(13, '¿Quién influye más en tu decisión sobre qué estudiar en el futuro?', 'Influencia', 1, 1, 1),
-	(14, '¿Tus maestros te han animado a explorar temas relacionados con la ciencia o la tecnología?', 'Maestro', 3, 1, 1),
-	(15, '¿Qué opinan tus amigos sobre el estudio de disciplinas relacionadas con la tecnología o la ciencia?', 'Amigos', 1, 1, 1),
-	(16, '¿Qué tanto apoyo recibes de tu familia para estudiar temas relacionados con las matemáticas o la ciencia?', 'Familia', 3, 1, 1),
-	(17, '¿Qué obstáculos sientes que podrías enfrentar al seguir una de estas carreras (Ciencia, Tecnología, Ingeniería, Arte y Matemáticas)?', 'Obstaculo', 2, 1, 1),
-	(18, '¿Qué sectores te interesan más para trabajar en el futuro?', 'Sectores', 1, 1, 1),
-	(19, '¿Qué tan optimista te sientes sobre tu futuro en una carrera que involucre tecnología o ciencia?', 'Optimismo', 3, 1, 1),
-	(20, '¿Crees que tu carrera te brindará estabilidad económica?', 'Estabilidad', 3, 3, 1),
-	(21, '¿Qué esperas lograr con tu carrera en términos de impacto social o tecnológico?', 'Impacto', 1, 1, 1),
-	(22, '¿Crees que las innovaciones tecnológicas están mejorando la calidad de vida de las personas?', 'Innovacion', 3, 1, 1),
-	(23, '¿Qué área consideras más importante para que avance tecnológicamente?', 'Avance', 1, 1, 1),
-	(24, '¿Cuál es la probabilidad de que selecciones una carrera relacionada con Ciencia, Tecnología, Ingeniería, Arte o Matemáticas (STEAM)?', 'Seleccion', 3, 1, 1),
-	(25, '¿Qué tan informado/a te sientes sobre las diferentes opciones de carrera dentro de las áreas de Ciencia, Tecnología, Ingeniería, Arte y Matemáticas (STEAM)?', 'Informado', 1, 1, 1);
-
--- Volcando estructura para tabla utplbd.respuestas
-CREATE TABLE IF NOT EXISTS `respuestas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
-  `valor` varchar(300) NOT NULL,
-  `opcion` int(11) NOT NULL,
-  `encuesta` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK2_ENCUESTA` (`encuesta`),
-  KEY `FK1_NOM_OPCION` (`opcion`) USING BTREE,
-  CONSTRAINT `FK1_NOM_OPCION` FOREIGN KEY (`opcion`) REFERENCES `opciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK2_ENCUESTA` FOREIGN KEY (`encuesta`) REFERENCES `encuesta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `preguntas` (`id`, `pregunta`, `nombre`, `tipo`, `area`, `estado`, `filtro`) VALUES
+	(1, 'Edad', 'Edad', 1, 2, 1, 1),
+	(2, 'Género', 'Género', 1, 2, 1, 1),
+	(3, 'Institución educativa', 'Institución', 1, 2, 1, 1),
+	(4, 'Área de residencia', 'Residencia', 1, 2, 1, 1),
+	(5, '¿En qué año escolar estás actualmente?', 'Nivel', 1, 2, 1, 1),
+	(6, '¿Qué idiomas hablas?', 'Idiomas', 2, 4, 1, 1),
+	(7, '¿Cuál es el nivel educativo más alto que han alcanzado tus padres o tutores:', 'Educación Familiar', 1, 3, 1, 0),
+	(8, '¿Cuál es el ingreso familiar mensual aproximado?', 'Ingresos', 1, 1, 1, 1),
+	(9, '¿Cuáles de las siguientes actividades te interesan?', 'Interes', 2, 1, 1, 1),
+	(10, '¿Cuáles de las siguientes actividades te gusta realizar?', 'Afinidad', 2, 1, 1, 1),
+	(11, '¿Qué asignatura disfrutas más en el colegio?', 'Asignatura', 1, 1, 1, 1),
+	(12, '¿Cuál de las siguientes carreras te parece más atractiva?', 'Carreras', 1, 3, 1, 0),
+	(13, '¿Quién influye más en tu decisión sobre qué estudiar en el futuro?', 'Influencia', 1, 3, 1, 1),
+	(14, '¿Tus maestros te han animado a explorar temas relacionados con la ciencia o la tecnología?', 'Maestro', 3, 4, 1, 0),
+	(15, '¿Qué opinan tus amigos sobre el estudio de disciplinas relacionadas con la tecnología o la ciencia?', 'Amigos', 1, 3, 1, 0),
+	(16, '¿Qué tanto apoyo recibes de tu familia para estudiar temas relacionados con las matemáticas o la ciencia?', 'Familia', 3, 3, 1, 0),
+	(17, '¿Qué obstáculos sientes que podrías enfrentar al seguir una de estas carreras (Ciencia, Tecnología, Ingeniería, Arte y Matemáticas)?', 'Obstaculo', 2, 3, 1, 0),
+	(18, '¿Qué sectores te interesan más para trabajar en el futuro?', 'Sectores', 1, 3, 1, 0),
+	(19, '¿Qué tan optimista te sientes sobre tu futuro en una carrera que involucre tecnología o ciencia?', 'Optimismo', 3, 3, 1, 0),
+	(20, '¿Crees que tu carrera te brindará estabilidad económica?', 'Estabilidad', 3, 3, 1, 0),
+	(21, '¿Qué esperas lograr con tu carrera en términos de impacto social o tecnológico?', 'Impacto', 1, 3, 1, 0),
+	(22, '¿Crees que las innovaciones tecnológicas están mejorando la calidad de vida de las personas?', 'Innovacion', 3, 1, 1, 0),
+	(23, '¿Qué área consideras más importante para que avance tecnológicamente?', 'Avance', 1, 1, 1, 1),
+	(24, '¿Cuál es la probabilidad de que selecciones una carrera relacionada con Ciencia, Tecnología, Ingeniería, Arte o Matemáticas (STEAM)?', 'Seleccion', 3, 1, 1, 0),
+	(25, '¿Qué tan informado/a te sientes sobre las diferentes opciones de carrera dentro de las áreas de Ciencia, Tecnología, Ingeniería, Arte y Matemáticas (STEAM)?', 'Informado', 1, 4, 1, 0);
 
 -- Volcando datos para la tabla utplbd.respuestas: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla utplbd.rol
-CREATE TABLE IF NOT EXISTS `rol` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `jerarquia` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla utplbd.rol: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla utplbd.rol: ~1 rows (aproximadamente)
 INSERT INTO `rol` (`id`, `nombre`, `jerarquia`) VALUES
 	(1, 'ESTUDIANTE', 1);
-
--- Volcando estructura para tabla utplbd.seccion
-CREATE TABLE IF NOT EXISTS `seccion` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla utplbd.seccion: ~2 rows (aproximadamente)
 INSERT INTO `seccion` (`id`, `nombre`) VALUES
 	(1, 'PANEL'),
 	(2, 'INTERNO');
 
--- Volcando estructura para tabla utplbd.tipo
-CREATE TABLE IF NOT EXISTS `tipo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla utplbd.tipo: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla utplbd.tipo: ~3 rows (aproximadamente)
 INSERT INTO `tipo` (`id`, `nombre`) VALUES
 	(1, 'OPCION SIMPLE'),
 	(2, 'OPCION MULTIPLE'),
 	(3, 'ESCALA');
 
--- Volcando estructura para tabla utplbd.usuarios
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(200) NOT NULL,
-  `pass` varchar(200) NOT NULL,
-  `estado` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  KEY `FK1_ESTADO_USER` (`estado`),
-  CONSTRAINT `FK1_ESTADO_USER` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla utplbd.usuarios: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla utplbd.usuarios: ~1 rows (aproximadamente)
 INSERT INTO `usuarios` (`id`, `username`, `pass`, `estado`) VALUES
 	(1, 'tanya', '$2y$10$F9v.NCZ7jr5BaSWUUuxihuDBOjTDuIVIogMOkIazsGsE8qasswLUe', 1);
 
