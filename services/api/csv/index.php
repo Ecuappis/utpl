@@ -46,11 +46,35 @@ try {
           // En la cabecera, no se divide por ; ni ,
           $procesado[] = $campo;
         } else {
-          // En las respuestas, sí se puede dividir por ; o ,
-          $partes = preg_split('/[;,]/', $campo);
+          // Primero, escapamos las comas en los números decimales
+          $campo = preg_replace_callback('/\d+(?:,\d{3})*(?:\.\d{2})?/', function ($match) {
+            // Reemplazamos las comas por un marcador especial (temporal)
+            return str_replace(',', 'COMA_NUMERAL', $match[0]);
+          }, $campo);
+
+          // Solo dividir por , o ; si están fuera de paréntesis
+          preg_match_all('/
+              (                       # Grupo de captura
+                  (?:                   # Grupo no capturante para cada elemento
+                      [^(),;]+          # Cualquier cosa excepto (, ), ; y ,
+                      |                 # O
+                      \([^()]*\)        # Texto dentro de paréntesis
+                  )+ 
+              )
+          /x', $campo, $coincidencias);
+
+          $partes = $coincidencias[0];
+
+          // Limpiar los elementos procesados
           $limpio = array_map(function ($item) {
             return htmlspecialchars(trim($item));
           }, $partes);
+
+          // Ahora restauramos las comas de los números decimales
+          $limpio = array_map(function ($item) {
+            return str_replace('COMA_NUMERAL', ',', $item);
+          }, $limpio);
+
           $procesado[] = $limpio;
         }
       }
