@@ -8,6 +8,9 @@
 </head>
 
 <body>
+  <article id="loading" class="loading">
+    <div><img src="../../resources/loading.gif"></div>
+  </article>
   <div id="subida" class="upload-container">
     <div class="upload-card">
       <h2>Cargar Archivo CSV</h2>
@@ -16,9 +19,7 @@
       <button onclick="cargarcsv();" class="upload-button">Subir archivo</button>
     </div>
   </div>
-  <div id="contenedor" class="resp-contenedor">
-  </div>
-
+  <div id="contenedor" class="resp-contenedor"></div>
   <script src="index.js"></script>
 </body>
 

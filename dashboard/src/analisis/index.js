@@ -1,4 +1,5 @@
 function cargarcsv() {
+  mostrarLoading();
   const fileInput = document.getElementById('file-input');
   const file = fileInput.files[0];
 
@@ -22,6 +23,7 @@ function cargarcsv() {
     })
     .then((data) => {
       // Respuesta del Servicio
+      ocultarLoading();
       if (data.respuesta) {
         let contenedor = document.getElementById('contenedor');
         contenedor.style.display = 'flex';
@@ -85,4 +87,14 @@ function cargarcsv() {
       console.error('Error:', error);
       alert('Hubo un problema al subir el archivo.');
     });
+}
+
+function mostrarLoading() {
+  const loading = document.getElementById('loading');
+  loading.style.display = 'flex';
+}
+
+function ocultarLoading() {
+  const loading = document.getElementById('loading');
+  loading.style.display = 'none';
 }
