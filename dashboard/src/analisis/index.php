@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <div class="upload-container">
+  <div id="subida" class="upload-container">
     <div class="upload-card">
       <h2>Cargar Archivo CSV</h2>
       <p>Selecciona un archivo para continuar</p>
@@ -16,6 +16,9 @@
       <button onclick="cargarcsv();" class="upload-button">Subir archivo</button>
     </div>
   </div>
+  <div id="contenedor" class="resp-contenedor">
+  </div>
+
   <script src="index.js"></script>
 </body>
 

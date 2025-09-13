@@ -96,10 +96,11 @@ try {
       exit;
     }
 
-    $data = json_encode([
+    $data = [
       'cabecera' => $cabecera,
       'respuestas' => $respuestas
-    ]);
+    ];
+
     $respuesta = analisisExploratorio($data);
   } else {
     http_response_code(400);
@@ -142,7 +143,7 @@ function analisisExploratorio($data)
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => $data,
+    CURLOPT_POSTFIELDS => json_encode($data),
     CURLOPT_HTTPHEADER => array(
       'Content-Type: application/json'
     ),
